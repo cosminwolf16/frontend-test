@@ -1,6 +1,7 @@
+import PeopleList from 'components/PersonList/PersonList';
 import { Person } from 'models/models';
 import { GetServerSideProps } from 'next';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 interface PeopleProps {
   peopleData: Person[];
@@ -16,8 +17,9 @@ const People: React.FC<PeopleProps> = ({ peopleData }) => {
   }
 
   return (
-    <div className="people">
+    <div>
       <h1>People</h1>
+      <PeopleList people={peopleData} />
     </div>
   );
 };
