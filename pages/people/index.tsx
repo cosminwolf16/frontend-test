@@ -4,6 +4,8 @@ import { Person } from 'models/models';
 import styles from 'styles/People.module.scss';
 import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
+import { useAppDispatch } from 'hooks/reduxHooks';
+import { loadPeopleData } from 'store/actions/peopleActions';
 
 interface PeopleProps {
   peopleData: Person[];
@@ -17,6 +19,8 @@ const People: React.FC<PeopleProps> = ({ peopleData }) => {
   const indexOfFirstPerson = indexOfLastPerson - peoplePerPage;
   const currentPeople = peopleData.slice(indexOfFirstPerson, indexOfLastPerson);
 
+  const dispatch = useAppDispatch();
+
   const paginate = (pageNumber: number) => {
     window.scrollTo({
       top: 0,
@@ -27,7 +31,9 @@ const People: React.FC<PeopleProps> = ({ peopleData }) => {
   };
 
   useEffect(() => {
-    console.log(peopleData);
+    dispatch(loadPeopleData(peopleData));
+
+    // eslint-disable-next-line
   }, []);
 
   if (!peopleData) {
