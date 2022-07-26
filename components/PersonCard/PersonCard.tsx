@@ -7,6 +7,14 @@ interface PersonCard {
 }
 
 const PersonCard: React.FC<PersonCard> = ({ person }) => {
+  if (
+    person.first_name === null ||
+    person.last_name === null ||
+    person.email === null
+  ) {
+    return null;
+  }
+
   return (
     <div className={styles.grid}>
       <Link href={`/people/${person.id}`}>
