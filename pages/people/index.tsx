@@ -6,6 +6,7 @@ import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { loadPeopleData } from 'store/actions/peopleActions';
+import { PEOPLE_PER_PAGE } from 'constants/peopleConstants';
 
 interface PeopleProps {
   peopleData: Person[];
@@ -13,10 +14,9 @@ interface PeopleProps {
 
 const People: React.FC<PeopleProps> = ({ peopleData }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [peoplePerPage, setPeoplePerPage] = useState(15);
 
-  const indexOfLastPerson = currentPage * peoplePerPage;
-  const indexOfFirstPerson = indexOfLastPerson - peoplePerPage;
+  const indexOfLastPerson = currentPage * PEOPLE_PER_PAGE;
+  const indexOfFirstPerson = indexOfLastPerson - PEOPLE_PER_PAGE;
   const currentPeople = peopleData.slice(indexOfFirstPerson, indexOfLastPerson);
 
   const dispatch = useAppDispatch();
@@ -45,7 +45,7 @@ const People: React.FC<PeopleProps> = ({ peopleData }) => {
       <h1 className={styles.heading}>People</h1>
       <PeopleList people={currentPeople} />
       <Pagination
-        peoplePerPage={peoplePerPage}
+        peoplePerPage={PEOPLE_PER_PAGE}
         totalPeople={peopleData.length}
         paginate={paginate}
       />
