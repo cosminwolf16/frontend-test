@@ -1,6 +1,7 @@
 import Pagination from 'components/Pagination/Pagination';
 import PeopleList from 'components/PersonList/PersonList';
 import { Person } from 'models/models';
+import styles from 'styles/People.module.scss';
 import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
 
@@ -16,7 +17,14 @@ const People: React.FC<PeopleProps> = ({ peopleData }) => {
   const indexOfFirstPerson = indexOfLastPerson - peoplePerPage;
   const currentPeople = peopleData.slice(indexOfFirstPerson, indexOfLastPerson);
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     console.log(peopleData);
@@ -28,7 +36,7 @@ const People: React.FC<PeopleProps> = ({ peopleData }) => {
 
   return (
     <div>
-      <h1>People</h1>
+      <h1 className={styles.heading}>People</h1>
       <PeopleList people={currentPeople} />
       <Pagination
         peoplePerPage={peoplePerPage}

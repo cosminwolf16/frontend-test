@@ -4,6 +4,7 @@
   justify-content: center;
   flex-wrap: wrap;
   max-width: 800px;
+  margin: 0 auto;
 }
 
 .card {
@@ -41,4 +42,11 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.heading {
+  color: #0070f3;
+  font-size: 70px;
+  font-weight: bold;
+  text-align: center;
 }
