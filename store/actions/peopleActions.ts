@@ -1,10 +1,11 @@
 import { Person } from 'models/models';
 
-export type PeopleActions = LoadPeopleData | SetCurrentPerson;
+export type PeopleActions = LoadPeopleData | SetCurrentPerson | UpdatePerson;
 
 export enum PeopleActionsType {
   LoadPeopleData,
   SetCurrentPerson,
+  UpdatePerson,
 }
 
 export interface LoadPeopleData {
@@ -25,4 +26,14 @@ export interface SetCurrentPerson {
 export const setCurrentPerson = (currentPerson: Person) => ({
   type: PeopleActionsType.SetCurrentPerson,
   payload: currentPerson,
+});
+
+export interface UpdatePerson {
+  type: PeopleActionsType.UpdatePerson;
+  payload: Person;
+}
+
+export const updatePerson = (person: Person) => ({
+  type: PeopleActionsType.UpdatePerson,
+  payload: person,
 });

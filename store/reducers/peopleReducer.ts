@@ -35,6 +35,11 @@ export const peopleReducer = (
         ...state,
         currentPerson: action.payload,
       };
+    case PeopleActionsType.UpdatePerson:
+      return {
+        ...state,
+        currentPerson: action.payload,
+      };
     default:
       return state;
   }

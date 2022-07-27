@@ -1,24 +1,28 @@
-import { useAppSelector } from 'hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import styles from 'styles/PersonPage.module.scss';
 import { useState } from 'react';
 import Link from 'next/link';
+import { updatePerson } from 'store/actions/peopleActions';
 
 export const PersonPage = () => {
-  const [isEditing, setIsEditing] = useState(false);
-
   const person = useAppSelector((state) => state.people.currentPerson);
 
-  const renderSubmitButton = () => {
-    if (isEditing) {
-      return <button type="submit">Save changes</button>;
-    }
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    date_of_birth: '',
+    industry: '',
+    salary: 0,
+    years_of_experience: 0,
+    id: person.id,
+  });
 
-    return (
-      <button type="submit" onClick={() => setIsEditing(true)}>
-        Enter edit mode
-      </button>
-    );
-  };
+  const dispatch = useAppDispatch();
+
+  const onFieldChange = (event: React.SyntheticEvent<EventTarget>) =>
+    // @ts-ignore
+    setFormData({ ...formData, [event.target.name]: event.target.value });
 
   return (
     <>
@@ -30,6 +34,14 @@ export const PersonPage = () => {
           </button>
         </a>
       </Link>
+      <div className={styles.information}>
+        <h2>{`${person.first_name} ${person.last_name}`}</h2>
+        <h2>{person.date_of_birth}</h2>
+        <h2>{person.email}</h2>
+        <h2>{person.industry} industry</h2>
+        <h2>{person.salary} salary</h2>
+        <h2>{person.years_of_experience} years of experience</h2>
+      </div>
       <div className={styles.container}>
         <form id="form" className={styles.form}>
           <div className={styles.formControl}>
@@ -38,7 +50,8 @@ export const PersonPage = () => {
               type="text"
               id="firstName"
               placeholder="Enter first name"
-              value={person?.first_name}
+              name="first_name"
+              onChange={(event) => onFieldChange(event)}
             />
           </div>
           <div className={styles.formControl}>
@@ -47,16 +60,18 @@ export const PersonPage = () => {
               type="text"
               id="lastName"
               placeholder="Enter last name"
-              value={person?.last_name}
+              name="last_name"
+              onChange={(event) => onFieldChange(event)}
             />
           </div>
           <div className={styles.formControl}>
-            <label htmlFor="dateOfBirth">Last Name</label>
+            <label htmlFor="dateOfBirth">Date of birth</label>
             <input
               type="text"
               id="dateOfBirth"
               placeholder="Enter date of birth"
-              value={person.date_of_birth}
+              name="date_of_birth"
+              onChange={(event) => onFieldChange(event)}
             />
           </div>
           <div className={styles.formControl}>
@@ -65,7 +80,8 @@ export const PersonPage = () => {
               type="text"
               id="email"
               placeholder="Enter email"
-              value={person.email}
+              name="email"
+              onChange={(event) => onFieldChange(event)}
             />
             <small>Error message</small>
           </div>
@@ -75,7 +91,8 @@ export const PersonPage = () => {
               type="text"
               id="industry"
               placeholder="Enter industry"
-              value={person.industry}
+              name="industry"
+              onChange={(event) => onFieldChange(event)}
             />
           </div>
           <div className={styles.formControl}>
@@ -84,7 +101,8 @@ export const PersonPage = () => {
               type="text"
               id="salary"
               placeholder="Enter salary"
-              value={person.salary}
+              name="salary"
+              onChange={(event) => onFieldChange(event)}
             />
           </div>
           <div className={styles.formControl}>
@@ -93,10 +111,20 @@ export const PersonPage = () => {
               type="text"
               id="yearsOfExperience"
               placeholder="Enter years of experience"
-              value={person.years_of_experience}
+              name="years_of_experience"
+              onChange={(event) => onFieldChange(event)}
             />
           </div>
-          {renderSubmitButton()}
+          <button
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              console.log(formData);
+              dispatch(updatePerson(formData));
+            }}
+          >
+            Save changes
+          </button>
         </form>
       </div>
     </>
