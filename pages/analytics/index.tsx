@@ -1,4 +1,3 @@
-import { useAppSelector } from 'hooks/reduxHooks';
 import { Person } from 'models/models';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
@@ -55,8 +54,6 @@ const Analytics: React.FC<Analytics> = ({ peopleData }) => {
       industry: industry,
     });
   });
-
-  console.log(averageAgePerIndustryData);
 
   return (
     <div>
