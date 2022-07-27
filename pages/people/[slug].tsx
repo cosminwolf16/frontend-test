@@ -1,11 +1,11 @@
 import { useAppSelector } from 'hooks/reduxHooks';
+import styles from 'styles/PersonPage.module.scss';
 import React from 'react';
 
 export const PersonPage = () => {
   const person = useAppSelector((state) => state.people.currentPerson);
-  console.log(person);
 
-  return <div>Person Page</div>;
+  return <div className={styles.title}>Person Page</div>;
 };
 
 export default PersonPage;
