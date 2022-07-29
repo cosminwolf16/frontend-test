@@ -16,8 +16,6 @@ interface Analytics {
 const Analytics: React.FC<Analytics> = ({ peopleData }) => {
   const router = useRouter();
 
-  console.log(peopleData);
-
   let averageSalaryPerYearsOfExperienceData: {
     averageSalary: number;
     yearsOfExperience: number;
@@ -37,8 +35,9 @@ const Analytics: React.FC<Analytics> = ({ peopleData }) => {
     averageSalary: number;
     industry: string;
   }[] = [];
-  let averageSalaryPerIndustryMap =
-    calculateAverageSalaryPerIndustry(peopleData);
+  let averageSalaryPerIndustryMap = calculateAverageSalaryPerIndustry(
+    peopleData.filter((person) => Boolean(person.industry))
+  );
   averageSalaryPerIndustryMap.forEach((averageSalary, industry) => {
     averageSalaryPerIndustryData.push({
       averageSalary: averageSalary,
