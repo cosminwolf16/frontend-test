@@ -2,6 +2,7 @@ import { Person } from 'models/models';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import styles from 'styles/Analytics.module.scss';
+import { VictoryBar, VictoryChart, VictoryTheme } from 'victory';
 import {
   calculateAverageAgePerIndustry,
   calculateAverageSalaryPerIndustry,
@@ -14,6 +15,8 @@ interface Analytics {
 
 const Analytics: React.FC<Analytics> = ({ peopleData }) => {
   const router = useRouter();
+
+  console.log(peopleData);
 
   let averageSalaryPerYearsOfExperienceData: {
     averageSalary: number;
@@ -56,7 +59,7 @@ const Analytics: React.FC<Analytics> = ({ peopleData }) => {
   });
 
   return (
-    <div>
+    <div className={styles.analytics}>
       <h1 className={styles.analyticsTitle}>Analytics page</h1>
       <button
         onClick={() => router.push('/')}
@@ -64,6 +67,41 @@ const Analytics: React.FC<Analytics> = ({ peopleData }) => {
       >
         Go back Home
       </button>
+      <div className="graph-section">
+        <h2 className={styles.sectionTitle}>
+          Average Salary Per Years of Experience
+        </h2>
+        <VictoryChart>
+          <VictoryBar
+            data={averageSalaryPerYearsOfExperienceData}
+            x="averageSalary"
+            y="yearsOfExperience"
+            theme={VictoryTheme.material}
+          />
+        </VictoryChart>
+      </div>
+      <div className="graph-section">
+        <h2 className={styles.sectionTitle}>Average Salary Per Industry</h2>
+        <VictoryChart>
+          <VictoryBar
+            data={averageSalaryPerIndustryData}
+            x="averageSalary"
+            y="industry"
+            theme={VictoryTheme.material}
+          />
+        </VictoryChart>
+      </div>
+      <div className="graph-section">
+        <h2 className={styles.sectionTitle}>Average Age Per Industry</h2>
+        <VictoryChart>
+          <VictoryBar
+            data={averageAgePerIndustryData}
+            x="averageAge"
+            y="industry"
+            theme={VictoryTheme.material}
+          />
+        </VictoryChart>
+      </div>
     </div>
   );
 };
