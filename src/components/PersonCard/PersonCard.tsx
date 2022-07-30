@@ -16,7 +16,7 @@ const PersonCard: React.FC<PersonCard> = ({ person }) => {
   }
 
   return (
-    <div className={styles.grid}>
+    <div className={styles.grid} data-testid="person-card">
       <Link href={`/people/${person.id}`}>
         <a className={styles.card}>
           <h2>{`${person.first_name} ${person.last_name}`}</h2>
