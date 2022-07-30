@@ -1,8 +1,11 @@
-import { Person } from 'models/models';
+import {
+  AgePerIndustry,
+  Person,
+  SalaryPerIndustry,
+  SalaryPerYears,
+} from 'models/models';
 
-export const calculateAverageSalaryPerYearsOfExperience = (
-  peopleData: Person[]
-) => {
+const calculateAverageSalaryPerYearsOfExperience = (peopleData: Person[]) => {
   let salaryMap = new Map();
   // @ts-ignore
   peopleData.forEach((person) => {
@@ -27,6 +30,25 @@ export const calculateAverageSalaryPerYearsOfExperience = (
     averageSalaryMap.set(yearsOfExperience, salaryAverage);
   });
   return averageSalaryMap;
+};
+
+export const generateAverageSalaryPerYearsOfExperienceData = (
+  peopleData: Person[]
+) => {
+  let averageSalaryPerYearsOfExperienceData: SalaryPerYears[] = [];
+  let averageSalaryPerYearsOfExperienceMap =
+    calculateAverageSalaryPerYearsOfExperience(peopleData);
+
+  averageSalaryPerYearsOfExperienceMap.forEach(
+    (averageSalary, yearsOfExperience) => {
+      averageSalaryPerYearsOfExperienceData.push({
+        averageSalary,
+        yearsOfExperience,
+      });
+    }
+  );
+
+  return averageSalaryPerYearsOfExperienceData;
 };
 
 export const calculateAverageSalaryPerIndustry = (peopleData: Person[]) => {
@@ -56,21 +78,22 @@ export const calculateAverageSalaryPerIndustry = (peopleData: Person[]) => {
   return averageSalaryMap;
 };
 
-const extractYearFromBirthDate = (dateOfBirth: string) => {
-  const dateString = dateOfBirth;
+export const generateAverageSalaryPerIndustryData = (peopleData: Person[]) => {
+  let averageSalaryPerIndustryData: SalaryPerIndustry[] = [];
+  let averageSalaryPerIndustryMap =
+    calculateAverageSalaryPerIndustry(peopleData);
 
-  const dateParts = dateString.split('/');
-  const year = new Date(
-    +dateParts[2],
-    // @ts-ignore
-    dateParts[1] - 1,
-    +dateParts[0]
-  ).getFullYear();
+  averageSalaryPerIndustryMap.forEach((averageSalary, industry) => {
+    averageSalaryPerIndustryData.push({
+      averageSalary,
+      industry,
+    });
+  });
 
-  return year;
+  return averageSalaryPerIndustryData;
 };
 
-export const calculateAverageAgePerIndustry = (peopleData: Person[]) => {
+const calculateAverageAgePerIndustry = (peopleData: Person[]) => {
   let ageMap = new Map();
   // @ts-ignore
   peopleData.forEach((person) => {
@@ -97,4 +120,32 @@ export const calculateAverageAgePerIndustry = (peopleData: Person[]) => {
     averageAgeMap.set(industry, ageAverage);
   });
   return averageAgeMap;
+};
+
+export const generateAverageAgeIndustryData = (peopleData: Person[]) => {
+  let averageAgePerIndustryData: AgePerIndustry[] = [];
+  let averageAgePerIndustryMap = calculateAverageAgePerIndustry(peopleData);
+
+  averageAgePerIndustryMap.forEach((averageAge, industry) => {
+    averageAgePerIndustryData.push({
+      averageAge,
+      industry,
+    });
+  });
+
+  return averageAgePerIndustryData;
+};
+
+const extractYearFromBirthDate = (dateOfBirth: string) => {
+  const dateString = dateOfBirth;
+
+  const dateParts = dateString.split('/');
+  const year = new Date(
+    +dateParts[2],
+    // @ts-ignore
+    dateParts[1] - 1,
+    +dateParts[0]
+  ).getFullYear();
+
+  return year;
 };

@@ -1,18 +1,12 @@
 import GraphSection from 'components/GraphSection';
 import Navigation from 'components/Navigation';
-import {
-  AgePerIndustry,
-  Person,
-  SalaryPerIndustry,
-  SalaryPerYears,
-} from 'models/models';
+import { Person } from 'models/models';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
 import styles from 'styles/Analytics.module.scss';
 import {
-  calculateAverageAgePerIndustry,
-  calculateAverageSalaryPerIndustry,
-  calculateAverageSalaryPerYearsOfExperience,
+  generateAverageAgeIndustryData,
+  generateAverageSalaryPerIndustryData,
+  generateAverageSalaryPerYearsOfExperienceData,
 } from 'utils/utils';
 
 interface Analytics {
@@ -20,39 +14,11 @@ interface Analytics {
 }
 
 const Analytics: React.FC<Analytics> = ({ peopleData }) => {
-  const router = useRouter();
-
-  let averageSalaryPerYearsOfExperienceData: SalaryPerYears[] = [];
-  let averageSalaryPerYearsOfExperienceMap =
-    calculateAverageSalaryPerYearsOfExperience(peopleData);
-  averageSalaryPerYearsOfExperienceMap.forEach(
-    (averageSalary, yearsOfExperiece) => {
-      averageSalaryPerYearsOfExperienceData.push({
-        averageSalary: averageSalary,
-        yearsOfExperience: yearsOfExperiece,
-      });
-    }
-  );
-
-  let averageSalaryPerIndustryData: SalaryPerIndustry[] = [];
-  let averageSalaryPerIndustryMap = calculateAverageSalaryPerIndustry(
-    peopleData.filter((person) => Boolean(person.industry))
-  );
-  averageSalaryPerIndustryMap.forEach((averageSalary, industry) => {
-    averageSalaryPerIndustryData.push({
-      averageSalary: averageSalary,
-      industry: industry,
-    });
-  });
-
-  let averageAgePerIndustryData: AgePerIndustry[] = [];
-  let averageAgePerIndustryMap = calculateAverageAgePerIndustry(peopleData);
-  averageAgePerIndustryMap.forEach((averageAge, industry) => {
-    averageAgePerIndustryData.push({
-      averageAge: averageAge,
-      industry: industry,
-    });
-  });
+  const averageSalaryPerYearsOfExperienceData =
+    generateAverageSalaryPerYearsOfExperienceData(peopleData);
+  const averageSalaryPerIndustryData =
+    generateAverageSalaryPerIndustryData(peopleData);
+  const averageAgePerIndustryData = generateAverageAgeIndustryData(peopleData);
 
   return (
     <div className={styles.analytics}>
