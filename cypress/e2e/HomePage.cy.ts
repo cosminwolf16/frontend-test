@@ -1,15 +1,26 @@
 describe('Home Page Tests', () => {
   it('Should Navigate to Home Page', () => {
-    // Start from the index page
+    cy.visit('http://localhost:4000/');
+  });
+
+  it('Should include People Page link and Analytics Page link in the navigation menu', () => {
     cy.visit('http://localhost:4000/');
 
-    // // Find a link with an href attribute containing "about" and click it
-    // cy.get('a[href*="about"]').click();
+    cy.get('header').contains('People Page');
+    cy.get('header').contains('Analytics Page');
+  });
 
-    // // The new url should include "/about"
-    // cy.url().should('include', '/about');
+  it('Should go to /people route and page when clicking on People Page', () => {
+    cy.visit('http://localhost:4000/');
 
-    // // The new page should contain an h1 with "About page"
-    // cy.get('h1').contains('About Page');
+    cy.get('header').contains('People Page').click();
+    cy.url().should('include', '/people');
+  });
+
+  it('Should go to /analytics route and page when clicking on Analytics Page', () => {
+    cy.visit('http://localhost:4000/');
+
+    cy.get('header').contains('Analytics Page').click();
+    cy.url().should('include', '/analytics');
   });
 });
