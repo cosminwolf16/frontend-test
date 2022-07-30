@@ -63,16 +63,21 @@ const People: React.FC<PeopleProps> = ({ peopleData }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const peopleData = await fetch('http://localhost:4000/api/people', {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json; charset=UTF-8',
-    },
-  }).then((response) => response.json());
+  try {
+    const peopleData = await fetch('http://localhost:4000/api/people', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json; charset=UTF-8',
+      },
+    }).then((response) => response.json());
 
-  return {
-    props: { peopleData },
-  };
+    return {
+      props: { peopleData },
+    };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 };
 
 export default People;

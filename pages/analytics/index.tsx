@@ -1,8 +1,13 @@
-import { Person } from 'models/models';
+import GraphSection from 'components/GraphSection';
+import {
+  AgePerIndustry,
+  Person,
+  SalaryPerIndustry,
+  SalaryPerYears,
+} from 'models/models';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import styles from 'styles/Analytics.module.scss';
-import { VictoryBar, VictoryChart, VictoryTheme } from 'victory';
 import {
   calculateAverageAgePerIndustry,
   calculateAverageSalaryPerIndustry,
@@ -16,10 +21,7 @@ interface Analytics {
 const Analytics: React.FC<Analytics> = ({ peopleData }) => {
   const router = useRouter();
 
-  let averageSalaryPerYearsOfExperienceData: {
-    averageSalary: number;
-    yearsOfExperience: number;
-  }[] = [];
+  let averageSalaryPerYearsOfExperienceData: SalaryPerYears[] = [];
   let averageSalaryPerYearsOfExperienceMap =
     calculateAverageSalaryPerYearsOfExperience(peopleData);
   averageSalaryPerYearsOfExperienceMap.forEach(
@@ -31,10 +33,7 @@ const Analytics: React.FC<Analytics> = ({ peopleData }) => {
     }
   );
 
-  let averageSalaryPerIndustryData: {
-    averageSalary: number;
-    industry: string;
-  }[] = [];
+  let averageSalaryPerIndustryData: SalaryPerIndustry[] = [];
   let averageSalaryPerIndustryMap = calculateAverageSalaryPerIndustry(
     peopleData.filter((person) => Boolean(person.industry))
   );
@@ -45,10 +44,7 @@ const Analytics: React.FC<Analytics> = ({ peopleData }) => {
     });
   });
 
-  let averageAgePerIndustryData: {
-    averageAge: number;
-    industry: string;
-  }[] = [];
+  let averageAgePerIndustryData: AgePerIndustry[] = [];
   let averageAgePerIndustryMap = calculateAverageAgePerIndustry(peopleData);
   averageAgePerIndustryMap.forEach((averageAge, industry) => {
     averageAgePerIndustryData.push({
@@ -66,41 +62,24 @@ const Analytics: React.FC<Analytics> = ({ peopleData }) => {
       >
         Go back Home
       </button>
-      <div className="graph-section">
-        <h2 className={styles.sectionTitle}>
-          Average Salary Per Years of Experience
-        </h2>
-        <VictoryChart>
-          <VictoryBar
-            data={averageSalaryPerYearsOfExperienceData}
-            x="averageSalary"
-            y="yearsOfExperience"
-            theme={VictoryTheme.material}
-          />
-        </VictoryChart>
-      </div>
-      <div className="graph-section">
-        <h2 className={styles.sectionTitle}>Average Salary Per Industry</h2>
-        <VictoryChart>
-          <VictoryBar
-            data={averageSalaryPerIndustryData}
-            x="averageSalary"
-            y="industry"
-            theme={VictoryTheme.material}
-          />
-        </VictoryChart>
-      </div>
-      <div className="graph-section">
-        <h2 className={styles.sectionTitle}>Average Age Per Industry</h2>
-        <VictoryChart>
-          <VictoryBar
-            data={averageAgePerIndustryData}
-            x="averageAge"
-            y="industry"
-            theme={VictoryTheme.material}
-          />
-        </VictoryChart>
-      </div>
+      <GraphSection
+        title="Average Salary Per Years of Experience"
+        data={averageSalaryPerYearsOfExperienceData}
+        content={{
+          primaryDataKey: 'averageSalary',
+          secondDataKey: 'yearsOfExperience',
+        }}
+      />
+      <GraphSection
+        title="Average Salary Per Industry"
+        data={averageSalaryPerIndustryData}
+        content={{ primaryDataKey: 'averageSalary', secondDataKey: 'industry' }}
+      />
+      <GraphSection
+        title="Average Age Per Industry"
+        data={averageAgePerIndustryData}
+        content={{ primaryDataKey: 'averageAge', secondDataKey: 'industry' }}
+      />
     </div>
   );
 };
@@ -108,14 +87,19 @@ const Analytics: React.FC<Analytics> = ({ peopleData }) => {
 export default Analytics;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const peopleData = await fetch('http://localhost:4000/api/people', {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json; charset=UTF-8',
-    },
-  }).then((response) => response.json());
+  try {
+    const peopleData = await fetch('http://localhost:4000/api/people', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json; charset=UTF-8',
+      },
+    }).then((response) => response.json());
 
-  return {
-    props: { peopleData },
-  };
+    return {
+      props: { peopleData },
+    };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 };
