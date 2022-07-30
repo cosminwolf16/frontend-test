@@ -62,15 +62,9 @@
       visibility: hidden;
     }
   }
-  .formControl .formControl .formControl .formControl.success input {
-    border-color: var(--success-color);
-  }
-  .formControl.error input {
-    border-color: var(--error-color);
-  }
 
-  .formControl.error small {
-    visibility: visible;
+  .errorMessage {
+    color: red;
   }
 
   .information {
