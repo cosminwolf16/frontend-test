@@ -1,11 +1,27 @@
-## Getting Started
+## Setup
 
-First, run the development server:
+Instalation guide:
 
-```bash
+```
+Clone the project using either https or a SSH key.
+```
+
+```
+Open the project and run one of the following commands to install dependencies:
+yarn
+or
+npm install
+```
+
+```
+In order to start the app, run:
+yarn run dev
+or
 npm run dev
-# or
-yarn dev
+```
+
+```
+The app is set to open on port 4000
 ```
 
 Open [http://localhost:4000](http://localhost:4000) with your browser to see the result.
