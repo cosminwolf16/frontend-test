@@ -1,0 +1,41 @@
+.navigation {
+  header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: #24252a;
+  }
+
+  .logo {
+    font-size: 30px;
+    margin: 0 auto;
+    color: #0070f3;
+    font-weight: bold;
+  }
+
+  .navLinks {
+    list-style: none;
+    display: flex;
+
+    a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      color: #edf0f1;
+      text-decoration: none;
+      font-size: 25px;
+    }
+
+    li {
+      padding: 0px 20px;
+
+      a {
+        transition: all 0.3s ease 0s;
+      }
+
+      a:hover {
+        color: #0088a9;
+      }
+    }
+  }
+}

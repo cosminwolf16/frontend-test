@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from 'styles/Home.module.scss';
+import Navigation from 'components/Navigation';
 
 const Home: NextPage = () => {
   return (
@@ -11,6 +12,7 @@ const Home: NextPage = () => {
         <meta name="description" content="People App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navigation />
 
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>

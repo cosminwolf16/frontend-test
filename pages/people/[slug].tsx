@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import styles from 'styles/PersonPage.module.scss';
 import { useState } from 'react';
-import Link from 'next/link';
 import { updatePerson } from 'store/actions/peopleActions';
+import Navigation from 'components/Navigation';
 
 export const PersonPage = () => {
   const person = useAppSelector((state) => state.people.currentPerson);
@@ -25,15 +25,9 @@ export const PersonPage = () => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
 
   return (
-    <>
+    <div className={styles.personPage}>
+      <Navigation />
       <h1 className={styles.title}>Person Page</h1>
-      <Link href="/people">
-        <a>
-          <button className={styles.backToPeopleButton}>
-            Go back to People
-          </button>
-        </a>
-      </Link>
       <div className={styles.information}>
         <h2>{`${person.first_name} ${person.last_name}`}</h2>
         <h2>{person.date_of_birth}</h2>
@@ -127,7 +121,7 @@ export const PersonPage = () => {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

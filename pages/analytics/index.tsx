@@ -1,4 +1,5 @@
 import GraphSection from 'components/GraphSection';
+import Navigation from 'components/Navigation';
 import {
   AgePerIndustry,
   Person,
@@ -55,13 +56,8 @@ const Analytics: React.FC<Analytics> = ({ peopleData }) => {
 
   return (
     <div className={styles.analytics}>
+      <Navigation />
       <h1 className={styles.analyticsTitle}>Analytics page</h1>
-      <button
-        onClick={() => router.push('/')}
-        className={styles.analyticsBackButton}
-      >
-        Go back Home
-      </button>
       <GraphSection
         title="Average Salary Per Years of Experience"
         data={averageSalaryPerYearsOfExperienceData}

@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { loadPeopleData } from 'store/actions/peopleActions';
 import { PEOPLE_PER_PAGE } from 'constants/peopleConstants';
-import { useRouter } from 'next/router';
+import Navigation from 'components/Navigation';
 
 interface PeopleProps {
   peopleData: Person[];
@@ -22,8 +22,6 @@ const People: React.FC<PeopleProps> = ({ peopleData }) => {
 
   const dispatch = useAppDispatch();
 
-  const router = useRouter();
-
   const paginate = (pageNumber: number) => {
     window.scrollTo({
       top: 0,
@@ -35,23 +33,16 @@ const People: React.FC<PeopleProps> = ({ peopleData }) => {
 
   useEffect(() => {
     dispatch(loadPeopleData(peopleData));
-
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch, peopleData]);
 
   if (!peopleData) {
     return null;
   }
 
   return (
-    <div>
+    <div className={styles.people}>
+      <Navigation />
       <h1 className={styles.heading}>People</h1>
-      <button
-        onClick={() => router.push('/')}
-        className={styles.peopleBackButton}
-      >
-        Go back Home
-      </button>
       <PeopleList people={currentPeople} />
       <Pagination
         peoplePerPage={PEOPLE_PER_PAGE}
