@@ -17,7 +17,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     pageNumbers.push(i);
   }
   return (
-    <nav>
+    <nav className={styles.pagination}>
       <ul className={styles.container}>
         {pageNumbers.map((number) => (
           <li key={number} className={styles.item}>

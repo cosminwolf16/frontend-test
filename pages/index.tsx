@@ -1,12 +1,14 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import styles from 'styles/Home.module.scss';
 import Navigation from 'components/Navigation';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
   return (
-    <div className={styles.container}>
+    <div className={styles.homePage}>
       <Head>
         <title>People System App</title>
         <meta name="description" content="People App" />
@@ -19,17 +21,13 @@ const Home: NextPage = () => {
           Welcome to <span>People App</span>
         </h1>
         <div className={styles.buttons}>
-          <Link href="/people">
-            <a>
-              <button>Go to People Page</button>
-            </a>
-          </Link>
-          <Link href="/analytics">
-            <a>
-              {' '}
-              <button>Go to Analytics Page</button>
-            </a>
-          </Link>
+          <button onClick={() => router.push('/people')}>
+            Go to People Page
+          </button>
+
+          <button onClick={() => router.push('/analytics')}>
+            Go to Analytics Page
+          </button>
         </div>
       </div>
     </div>
