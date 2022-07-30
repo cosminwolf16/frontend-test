@@ -4,10 +4,9 @@ import styles from 'styles/People.module.scss';
 
 interface PersonCard {
   person: Person;
-  onClick: () => void;
 }
 
-const PersonCard: React.FC<PersonCard> = ({ person, onClick }) => {
+const PersonCard: React.FC<PersonCard> = ({ person }) => {
   if (
     person.first_name === null ||
     person.last_name === null ||
@@ -19,7 +18,7 @@ const PersonCard: React.FC<PersonCard> = ({ person, onClick }) => {
   return (
     <div className={styles.grid}>
       <Link href={`/people/${person.id}`}>
-        <a className={styles.card} onClick={onClick}>
+        <a className={styles.card}>
           <h2>{`${person.first_name} ${person.last_name}`}</h2>
           <p>{person.email}</p>
         </a>

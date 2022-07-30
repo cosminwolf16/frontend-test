@@ -3,12 +3,12 @@ import { PeopleActions, PeopleActionsType } from 'store/actions/peopleActions';
 
 interface PeopleState {
   people: Person[];
-  currentPerson: Person;
+  formData: Person;
 }
 
 export const initialState: PeopleState = {
   people: [],
-  currentPerson: {
+  formData: {
     first_name: '',
     last_name: '',
     email: '',
@@ -30,15 +30,10 @@ export const peopleReducer = (
         ...state,
         people: action.payload,
       };
-    case PeopleActionsType.SetCurrentPerson:
+    case PeopleActionsType.SetFormData:
       return {
         ...state,
-        currentPerson: action.payload,
-      };
-    case PeopleActionsType.UpdatePerson:
-      return {
-        ...state,
-        currentPerson: action.payload,
+        formData: action.payload,
       };
     default:
       return state;

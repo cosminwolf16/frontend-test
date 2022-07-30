@@ -8,18 +8,10 @@ interface PeopleListProps {
 }
 
 const PeopleList: React.FC<PeopleListProps> = ({ people }) => {
-  const dispatch = useAppDispatch();
-
   return (
     <>
       {people.map((person) => {
-        return (
-          <PersonCard
-            person={person}
-            key={person.id}
-            onClick={() => dispatch(setCurrentPerson(person))}
-          />
-        );
+        return <PersonCard person={person} key={person.id} />;
       })}
     </>
   );
