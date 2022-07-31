@@ -3,7 +3,7 @@
 Instalation guide:
 
 ```
-Clone the project using either https or a SSH key.
+Clone the project using either https or a SSH key with the git clone command.
 ```
 
 ```
@@ -25,6 +25,14 @@ The app is set to open on port 4000
 ```
 
 Open [http://localhost:4000](http://localhost:4000) with your browser to see the result.
+
+```
+
+Running cypress tests using the commands:
+yarn run cypress
+or
+npm run cypress
+```
 
 App has <b>3</b> main routes.
 
