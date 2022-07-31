@@ -21,9 +21,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       <ul className={styles.container}>
         {pageNumbers.map((number) => (
           <li key={number} className={styles.item}>
-            <a onClick={() => paginate(number)} className="page-link">
-              {number}
-            </a>
+            <a onClick={() => paginate(number)}>{number}</a>
           </li>
         ))}
       </ul>

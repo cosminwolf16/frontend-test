@@ -1,5 +1,5 @@
-import { Person } from 'models/models';
 import Link from 'next/link';
+import { Person } from 'models/models';
 import styles from 'styles/People.module.scss';
 
 interface PersonCard {

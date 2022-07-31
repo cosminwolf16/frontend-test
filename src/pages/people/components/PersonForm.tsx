@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { setFormData } from 'store/actions/peopleActions';
-import styles from 'styles/PersonPage.module.scss';
-import { useRouter } from 'next/router';
 import { getAllPeople, getPerson } from 'selectors/peopleSelectors';
+import styles from 'styles/PersonPage.module.scss';
 
 export const PersonForm: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState({

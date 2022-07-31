@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import styles from 'styles/Home.module.scss';
-import Navigation from 'components/Navigation';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import Navigation from 'components/Navigation';
+import styles from 'styles/Home.module.scss';
 
 const Home: NextPage = () => {
   const router = useRouter();

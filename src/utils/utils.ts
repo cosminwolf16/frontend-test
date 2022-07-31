@@ -7,7 +7,6 @@ import {
 
 const calculateAverageSalaryPerYearsOfExperience = (peopleData: Person[]) => {
   let salaryMap = new Map();
-  // @ts-ignore
   peopleData.forEach((person) => {
     let salaryList = salaryMap.get(person.years_of_experience);
     if (salaryList === undefined) {
@@ -53,7 +52,6 @@ export const generateAverageSalaryPerYearsOfExperienceData = (
 
 export const calculateAverageSalaryPerIndustry = (peopleData: Person[]) => {
   let salaryMap = new Map();
-  // @ts-ignore
   peopleData.forEach((person) => {
     let salaryList = salaryMap.get(person.industry);
     if (salaryList === undefined) {
@@ -95,7 +93,6 @@ export const generateAverageSalaryPerIndustryData = (peopleData: Person[]) => {
 
 const calculateAverageAgePerIndustry = (peopleData: Person[]) => {
   let ageMap = new Map();
-  // @ts-ignore
   peopleData.forEach((person) => {
     let ageList = ageMap.get(person.industry);
     if (ageList === undefined) {

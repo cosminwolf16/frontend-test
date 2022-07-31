@@ -3,7 +3,7 @@
 Instalation guide:
 
 ```
-Clone the project using either https or a SSH key with the git clone command.
+Clone the project using either https or a SSH key with the git clone command or download the zip file.
 ```
 
 ```
@@ -34,6 +34,8 @@ or
 npm run cypress
 ```
 
+## App Description
+
 App has <b>3</b> main routes.
 
 <b>/</b> <br>
@@ -45,6 +47,6 @@ The "/" (home page) route is more of a standard welcome page where users can cho
 
 The main route /people where all the people are rendered using pagination.
 
-Second route /people/[slug] is based upon the /people route and is home to each individual person.
+Second route /people/[id] is based upon the /people route and is home to each individual person.
 
 Third route /analytics where graphs are displayed based on different types of calculations for all the people.

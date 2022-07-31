@@ -1,13 +1,13 @@
-import Pagination from 'components/Pagination/Pagination';
-import PeopleList from 'components/PersonList/PersonList';
-import { Person } from 'models/models';
-import styles from 'styles/People.module.scss';
 import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
+import { Person } from 'models/models';
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { loadPeopleData } from 'store/actions/peopleActions';
 import { PEOPLE_PER_PAGE } from 'constants/peopleConstants';
+import Pagination from 'components/Pagination/Pagination';
+import PeopleList from 'components/PersonList/PersonList';
 import Navigation from 'components/Navigation';
+import styles from 'styles/People.module.scss';
 
 interface PeopleProps {
   peopleData: Person[];

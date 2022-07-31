@@ -1,7 +1,7 @@
-import styles from 'styles/PersonPage.module.scss';
 import Navigation from 'components/Navigation';
 import PersonForm from './components/PersonForm';
 import PersonDetails from './components/PersonDetails';
+import styles from 'styles/PersonPage.module.scss';
 
 export const PersonPage = () => {
   return (

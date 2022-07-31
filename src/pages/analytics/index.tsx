@@ -1,13 +1,13 @@
-import GraphSection from 'components/GraphSection';
-import Navigation from 'components/Navigation';
-import { Person } from 'models/models';
 import { GetServerSideProps } from 'next';
-import styles from 'styles/Analytics.module.scss';
+import { Person } from 'models/models';
 import {
   generateAverageAgeIndustryData,
   generateAverageSalaryPerIndustryData,
   generateAverageSalaryPerYearsOfExperienceData,
 } from 'utils/utils';
+import GraphSection from 'components/GraphSection';
+import Navigation from 'components/Navigation';
+import styles from 'styles/Analytics.module.scss';
 
 interface Analytics {
   peopleData: Person[];

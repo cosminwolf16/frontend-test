@@ -1,5 +1,5 @@
-import PersonCard from 'components/PersonCard/PersonCard';
 import { Person } from 'models/models';
+import PersonCard from 'components/PersonCard/PersonCard';
 
 interface PeopleListProps {
   people: Person[];
